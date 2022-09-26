@@ -14,6 +14,8 @@ const index = () => {
       Create my FREE resume now
     </button>
 
+    <span className='text-blue-500 text-center'>Why should I use Resmerise?</span>
+
   </section>
   )
 }
