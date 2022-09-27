@@ -2,7 +2,7 @@ import React from 'react'
 import Why from './Why'
 const index = () => {
   return (
-    <section className=" flex flex-col justify-around">
+    <section className=" flex flex-col justify-around relative">
     <h1 className="text-6xl font-black leading-snug">
       Get noticed by FAANG <strong className="text-blue-500">FAST</strong>
     </h1>
@@ -15,7 +15,7 @@ const index = () => {
     </button>
 
     <span className='text-blue-500 text-center'>Why should I use Resmerise?</span>
-
+   
   </section>
   )
 }
