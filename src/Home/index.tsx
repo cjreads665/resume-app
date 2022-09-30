@@ -1,5 +1,5 @@
 import React from 'react'
-import Why from './Why'
+import { Link } from 'react-router-dom'
 const index = () => {
   return (
     <section className=" flex flex-col justify-around relative">
@@ -10,9 +10,12 @@ const index = () => {
     <h5 className="text-xl mb-4">
       FREE ATS-friendly resume in less than 2 minutes
     </h5>
-    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded">
+    <Link to="/create-resume" className='w-full'>
+    <button className="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-4 px-4 rounded">
       Create my FREE resume now
     </button>
+    </Link>
+  
 
     <span className='text-blue-500 text-center'>Why should I use Resmerise?</span>
    
