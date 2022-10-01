@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import Stepper from '../../Stepper/Stepper'
 import StepperControl from '../../Stepper/StepperControl'
@@ -7,6 +8,7 @@ import Experience from './Experience';
 import PersonalInfo from './PersonalInfo';
 import Projects from './Projects';
 import Skills from './Skills';
+
 const index = () => {
   const [page,setPage] = useState(0);
   const titles = [
