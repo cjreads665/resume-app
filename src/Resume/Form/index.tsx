@@ -14,7 +14,6 @@ const index = () => {
   const titles = [
     'Personal Details',
     'Skills',
-    'Social',
     'Experience',
     'Education',
     'Projects',

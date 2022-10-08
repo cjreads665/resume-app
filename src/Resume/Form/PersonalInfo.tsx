@@ -35,7 +35,7 @@ const PersonalInfo = () => {
     {
       type: "textarea",
       name: "summary",
-      label: "Professional Summary",
+      label: "Professional Summary(3 lines minimum)",
       placeholder: "Ex: Web Developer with 2 years of experience",
     },
   ];
