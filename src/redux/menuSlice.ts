@@ -8,7 +8,6 @@ export const menuSlice = createSlice({
     reducers:{
         openMenu : (state:any,action : any)=>{
            state.isOpen = !state.isOpen
-           console.log(state.isOpen);
            
         }
     }

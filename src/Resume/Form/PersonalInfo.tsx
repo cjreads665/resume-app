@@ -1,6 +1,18 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addPersonalInfo } from "../../redux/userSlice";
+import { useSelector } from "react-redux";
 const PersonalInfo = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state: any) => state.user);
+  const [personalInfo, setPersonalInfo] = useState({
+    name: "",
+    place: "",
+    email: "",
+    phone: "",
+    website: "",
+    summary: "",
+  });
   const fields = [
     {
       type: "text",
@@ -54,6 +66,15 @@ const PersonalInfo = () => {
           id={field.name}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
           placeholder={field.placeholder}
+          onChange={(e) => {
+            dispatch(
+              addPersonalInfo({
+                name: field.name,
+                value: e.target.value,
+              })
+            );
+            // console.log(state);
+          }}
           required
         />
       </div>

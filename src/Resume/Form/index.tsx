@@ -1,4 +1,5 @@
-
+import { useDispatch } from "react-redux";
+import { addPersonalInfo } from "../../redux/userSlice";
 import React, { useState } from 'react'
 import Stepper from '../../Stepper/Stepper'
 import StepperControl from '../../Stepper/StepperControl'
@@ -50,6 +51,7 @@ const index = () => {
            className={`${page<=0 ? "bg-blue-100" : "bg-blue-500 hover:bg-blue-700"} w-32 text-white font-bold py-4 px-4 rounded`}
             onClick={()=>{
               setPage((currentPage)=>currentPage-1)
+              
             }}
             disabled={page<=0 ? true : false}
           >Prev</button>
@@ -58,6 +60,7 @@ const index = () => {
           className={`${page>=titles.length-1 ? "bg-blue-100" : "bg-blue-500 hover:bg-blue-700"} w-32 text-white font-bold py-4 px-4 rounded`}
           onClick={()=>{
             setPage((currentPage)=>currentPage+1)
+            console.log(titles[page]);
           }}
           disabled={page>=titles.length-1 ? true : false}
           >Next</button>
