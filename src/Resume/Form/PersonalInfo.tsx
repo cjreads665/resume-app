@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPersonalInfo } from "../../redux/userSlice";
 import { useSelector } from "react-redux";
@@ -52,7 +52,7 @@ const PersonalInfo = () => {
     },
   ];
 
-  const list = fields.map((field: any) => {
+  const list = Children.toArray(fields.map((field: any) => {
     return (
       <div className="mb-6">
         <label
@@ -79,7 +79,7 @@ const PersonalInfo = () => {
         />
       </div>
     );
-  });
+  }));
   return <div>{list}</div>;
 };
 
