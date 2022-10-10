@@ -4,7 +4,6 @@ import { addPersonalInfo } from "../../redux/userSlice";
 import { useSelector } from "react-redux";
 const PersonalInfo = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state: any) => state.user);
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
     place: "",

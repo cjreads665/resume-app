@@ -6,15 +6,21 @@ export const userSlice = createSlice({
     personalInfo:{
         name : "",
         place : ""
+    },
+    skills:{
+
     }
   },
   reducers: {
     addPersonalInfo: (state: any, action: any) => {
       state.personalInfo[action.payload.name] = action.payload.value
     },
+    addSkills : (state:any,action:any)=>{  
+      state.skills[action.payload.name] = action.payload.value
+    }
   },
 });
 
-export const { addPersonalInfo } = userSlice.actions;
+export const { addPersonalInfo,addSkills } = userSlice.actions;
 
 export default userSlice.reducer;
