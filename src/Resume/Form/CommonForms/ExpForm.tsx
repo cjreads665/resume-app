@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from "react-redux";
+import { updateExp} from "../../../redux/userSlice"
 
 function capitalizeFirstLetter(string:string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -8,7 +10,9 @@ function getKeyByValue(object:any, value:string) {
 }
 
 const ExpForm = (props:any) => {
+  let dispatch = useDispatch()
   let index = props.count +1
+  // console.log(props);
   
   const [details,setDetails] = useState({
     compName : '',
@@ -16,7 +20,8 @@ const ExpForm = (props:any) => {
     startDate : [],
     endDate : [],
     jobDesc : '',
-    isComplete : false
+    isComplete : false,
+    index: 0
   })
  
   console.log(details);
@@ -45,13 +50,13 @@ const ExpForm = (props:any) => {
   
   return (
     <div className={` mt-4 border border-gray-300 bg-gray-50 p-4 py-8 rounded-lg`}>
-      <div className={` ${details.isComplete ? "pointer-events-none" : "pointer-events-auto"} `}>
+      <div className={` ${details?.isComplete ? "pointer-events-none" : "pointer-events-auto"} `}>
         <label htmlFor="companyName">Company Name</label>
         <input
           type="text"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
           placeholder="Facebook Inc."
-          value={details.compName}
+          value={details?.compName}
           onChange={(e)=>{
             setDetails((prevState:any)=>({
               ...prevState,
@@ -64,7 +69,7 @@ const ExpForm = (props:any) => {
           type="text"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
           placeholder="Ex : Web Developer"
-          value={details.role}
+          value={details?.role}
           onChange={(e)=>{
             setDetails((prevState:any)=>({
               ...prevState,
@@ -80,7 +85,7 @@ const ExpForm = (props:any) => {
               id="startDate"
               name="startDate"
               className='border border-black p-2 rounded-md w-1/2'
-              value={`${details.startDate[1]}-${getKeyByValue(months,details.startDate[0])}-${details.startDate[2]}`}
+              value={`${details?.startDate[1]}-${getKeyByValue(months,details?.startDate[0])}-${details?.startDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
                 console.log(date);
@@ -102,7 +107,7 @@ const ExpForm = (props:any) => {
               id="endDate"
               name="endDate"
               className='border border-black p-2 rounded-md w-1/2'
-              value={`${details.endDate[1]}-${getKeyByValue(months,details.endDate[0])}-${details.endDate[2]}`}
+              value={`${details?.endDate[1]}-${getKeyByValue(months,details?.endDate[0])}-${details?.endDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
                 let endDay = date.split("-")[2]
@@ -119,7 +124,7 @@ const ExpForm = (props:any) => {
         <label htmlFor="description">Job Description(minimum 3 sentences)</label>
    <textarea name="description" id="description" rows={4} className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
    placeholder="Ex: Created and managed react components."
-   value={details.jobDesc}
+   value={details?.jobDesc}
    onChange={(e)=>{
     setDetails((prevState:any)=>({
       ...prevState,
@@ -142,7 +147,7 @@ const ExpForm = (props:any) => {
    <button type='button'
    onClick={(e)=>{
     e.preventDefault()
-    if(details.endDate.length==0 || details.startDate.length==0 || details.jobDesc.length<4 || details.compName.length<2 || details.role.length==0 ){
+    if(details?.endDate.length==0 || details?.startDate.length==0 || details?.jobDesc.length<4 || details.compName.length<2 || details.role.length==0 ){
       alert("please fill all the fields before proceeding!")
       return
     }
@@ -150,6 +155,12 @@ const ExpForm = (props:any) => {
       ...prevState,
       isComplete : true
     }))
+    dispatch(
+      updateExp({
+        index : details.index,
+        details : details
+      })
+    );
   }}
    className='px-4 py-1.5 mt-4 bg-green-400 '><i className="fa-solid fa-check"></i></button>
 
