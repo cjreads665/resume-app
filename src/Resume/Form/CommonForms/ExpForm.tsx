@@ -1,6 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const ExpForm = () => {
+function capitalizeFirstLetter(string:string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function getKeyByValue(object:any, value:string) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+const ExpForm = (props:any) => {
+  let index = props.count +1
+  
   const [details,setDetails] = useState({
     compName : '',
     role : '',
@@ -9,8 +18,29 @@ const ExpForm = () => {
     jobDesc : '',
     isComplete : false
   })
-
+ 
   console.log(details);
+  // console.log(props);
+  var months: any = {
+    1: "january",
+    2: "february",
+    3: "march",
+    4: "april",
+    5: "may",
+    6: "june",
+    7: "july",
+    8: "august",
+    9: "september",
+    10: "october",
+    11: "november",
+    12: "december",
+  };
+
+ useEffect(()=>{
+  if(!index){
+    setDetails(props.details)
+  }
+ },[5])
   
   
   return (
@@ -34,6 +64,7 @@ const ExpForm = () => {
           type="text"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
           placeholder="Ex : Web Developer"
+          value={details.role}
           onChange={(e)=>{
             setDetails((prevState:any)=>({
               ...prevState,
@@ -49,9 +80,12 @@ const ExpForm = () => {
               id="startDate"
               name="startDate"
               className='border border-black p-2 rounded-md w-1/2'
+              value={`${details.startDate[1]}-${getKeyByValue(months,details.startDate[0])}-${details.startDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
-                let startMonth = date.split("-")[1]; //month
+                console.log(date);
+                let startDay = date.split("-")[2]
+                let startMonth = capitalizeFirstLetter(months[date.split("-")[1]]); //month
                 let startYear = date.split("-")[0]; //year
                 setDetails((prevState:any)=>({
                   ...prevState,
@@ -68,9 +102,11 @@ const ExpForm = () => {
               id="endDate"
               name="endDate"
               className='border border-black p-2 rounded-md w-1/2'
+              value={`${details.endDate[1]}-${getKeyByValue(months,details.endDate[0])}-${details.endDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
-                let endMonth = date.split("-")[1]; //month
+                let endDay = date.split("-")[2]
+                let endMonth = capitalizeFirstLetter(months[date.split("-")[1].split("")[1]]); //month
                 let endYear = date.split("-")[0]; //year
                 setDetails((prevState:any)=>({
                   ...prevState,
@@ -83,6 +119,7 @@ const ExpForm = () => {
         <label htmlFor="description">Job Description(minimum 3 sentences)</label>
    <textarea name="description" id="description" rows={4} className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
    placeholder="Ex: Created and managed react components."
+   value={details.jobDesc}
    onChange={(e)=>{
     setDetails((prevState:any)=>({
       ...prevState,

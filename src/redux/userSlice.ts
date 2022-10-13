@@ -9,7 +9,19 @@ export const userSlice = createSlice({
     },
     skills:{
 
-    }
+    },
+    experience :[
+      {
+        compName : 'some',
+        role : 'dev',
+        startDate : ["october","2022","10"],
+        endDate : ["october","2022","25"],
+        jobDesc : 'some desc',
+        isComplete : false
+      },
+ 
+    ],
+
   },
   reducers: {
     addPersonalInfo: (state: any, action: any) => {
@@ -17,6 +29,9 @@ export const userSlice = createSlice({
     },
     addSkills : (state:any,action:any)=>{  
       state.skills[action.payload.name] = action.payload.value
+    },
+    addExp : (state:any,action:any)=>{
+
     }
   },
 });
