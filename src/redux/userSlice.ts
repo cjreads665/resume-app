@@ -11,16 +11,7 @@ export const userSlice = createSlice({
 
     },
     experience :[
-      {
-        compName : 'some',
-        index : 0,
-        role : 'dev',
-        startDate : ["october","2022","10"],
-        endDate : ["october","2022","25"],
-        jobDesc : 'some desc',
-        isComplete : false
-      },
- 
+
     ],
 
   },

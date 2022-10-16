@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
-import { updateExp} from "../../../redux/userSlice"
+import { addExp, updateExp} from "../../../redux/userSlice"
 
 function capitalizeFirstLetter(string:string) {
-  // console.log(string);
-  
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 //october = 10
@@ -12,9 +10,6 @@ function getMonthNumber(object:any, value:string) {
   if(value){
     value = value.toLowerCase()
     let monthNumber = Number(Object.keys(object).find(key => object[key] === value))
-    // console.log(value);
-    
-    // console.log(typeof Number(Object.keys(object).find(key => object[key] === value)) );
     if(monthNumber>=10){
       return monthNumber
     }
@@ -26,8 +21,7 @@ function getMonthNumber(object:any, value:string) {
 
 const ExpForm = (props:any) => {
   let dispatch = useDispatch()
-  let index = props.count +1
-  // console.log(props);
+  let index = props.count+1
   
   const [details,setDetails] = useState({
     compName : '',
@@ -39,8 +33,7 @@ const ExpForm = (props:any) => {
     index: 0
   })
  
-  console.log(details);
-  // console.log(props);
+  // console.log(details);
   var months: any = {
     1: "january",
     2: "february",
@@ -56,10 +49,15 @@ const ExpForm = (props:any) => {
     12: "december",
   };
 
+  const deleteForm = ()=>{
+    props.setCount((prev:any)=>prev.count - 1)
+  }
+
  useEffect(()=>{
   if(!index){
     setDetails(props.details)
   }
+
  },[5])
   
   
@@ -129,7 +127,6 @@ const ExpForm = (props:any) => {
                 
                 let endDay = date.split("-")[2]
                 let endMonth = capitalizeFirstLetter(months[Number(date.split("-")[1])]); //month
-                // console.log( Number(date.split("-")[1]));
                 
                 let endYear = date.split("-")[0]; //year
                 setDetails((prevState:any)=>({
@@ -174,12 +171,24 @@ const ExpForm = (props:any) => {
       ...prevState,
       isComplete : true
     }))
-    dispatch(
-      updateExp({
-        index : details.index,
-        details : details
-      })
-    );
+    if(!index){
+      dispatch(
+        updateExp({
+          index : details.index,
+          details : details
+        })
+      );
+    }
+    else{
+      dispatch(
+        addExp({
+          details : details
+        })
+      )
+    props.setCreated(true)
+      
+    }
+
   }}
    className='px-4 py-1.5 mt-4 bg-green-400 '><i className="fa-solid fa-check"></i></button>
 
