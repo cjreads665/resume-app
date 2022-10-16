@@ -32,7 +32,7 @@ export const userSlice = createSlice({
       state.skills[action.payload.name] = action.payload.value;
     },
     addExp : (state:any,action:any)=>{
-
+        state.experience.push(action.payload.details)
     },
     updateExp : (state:any,action:any)=>{
       state.experience[action.payload.index] = action.payload.details;
