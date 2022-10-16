@@ -3,10 +3,25 @@ import { useDispatch } from "react-redux";
 import { updateExp} from "../../../redux/userSlice"
 
 function capitalizeFirstLetter(string:string) {
+  // console.log(string);
+  
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-function getKeyByValue(object:any, value:string) {
-  return Object.keys(object).find(key => object[key] === value);
+//october = 10
+function getMonthNumber(object:any, value:string) {
+  if(value){
+    value = value.toLowerCase()
+    let monthNumber = Number(Object.keys(object).find(key => object[key] === value))
+    // console.log(value);
+    
+    // console.log(typeof Number(Object.keys(object).find(key => object[key] === value)) );
+    if(monthNumber>=10){
+      return monthNumber
+    }
+    else{
+     return ('0' + monthNumber).slice(-2) 
+    }
+  }
 }
 
 const ExpForm = (props:any) => {
@@ -85,16 +100,16 @@ const ExpForm = (props:any) => {
               id="startDate"
               name="startDate"
               className='border border-black p-2 rounded-md w-1/2'
-              value={`${details?.startDate[1]}-${getKeyByValue(months,details?.startDate[0])}-${details?.startDate[2]}`}
+              value={`${details?.startDate[1]}-${getMonthNumber(months,details?.startDate[0])}-${details?.startDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
                 console.log(date);
                 let startDay = date.split("-")[2]
-                let startMonth = capitalizeFirstLetter(months[date.split("-")[1]]); //month
+                let startMonth = capitalizeFirstLetter(months[Number(date.split("-")[1])]); //month
                 let startYear = date.split("-")[0]; //year
                 setDetails((prevState:any)=>({
                   ...prevState,
-                  startDate : [startMonth,startYear]
+                  startDate : [startMonth,startYear,startDay]
                 }))
                 
               }}
@@ -107,15 +122,19 @@ const ExpForm = (props:any) => {
               id="endDate"
               name="endDate"
               className='border border-black p-2 rounded-md w-1/2'
-              value={`${details?.endDate[1]}-${getKeyByValue(months,details?.endDate[0])}-${details?.endDate[2]}`}
+              value={`${details?.endDate[1]}-${getMonthNumber(months,details?.endDate[0])}-${details?.endDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
+                console.log(date);
+                
                 let endDay = date.split("-")[2]
-                let endMonth = capitalizeFirstLetter(months[date.split("-")[1].split("")[1]]); //month
+                let endMonth = capitalizeFirstLetter(months[Number(date.split("-")[1])]); //month
+                // console.log( Number(date.split("-")[1]));
+                
                 let endYear = date.split("-")[0]; //year
                 setDetails((prevState:any)=>({
                   ...prevState,
-                  endDate : [endMonth,endYear]
+                  endDate : [endMonth,endYear,endDay]
                 }))
               }}
             ></input>
