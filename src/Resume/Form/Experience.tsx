@@ -7,10 +7,10 @@ const Experience = () => {
   const expArray = useSelector((state: any) => state.user.experience);
 
   //if there is no array in redux store, initialize it with 0
-  //else if it present, reduce the count by 1 - but why?
+  //else if it present, reduce the count by 1 - but why? *__update on 30 Oct - removed dependancy on expArray* 
   //count controls the number of ExpForms to be created
   //it gets increased every time the add button is clicked
-  const [count, setCount] = useState(expArray[0] ? expArray.length: 0)
+  const [count, setCount] = useState(0)
 
 
   /* created state will track if the data has been sent to the redux store or not
