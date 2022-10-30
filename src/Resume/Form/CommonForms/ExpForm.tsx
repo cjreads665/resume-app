@@ -62,7 +62,7 @@ const ExpForm = (props:any) => {
   
   
   return (
-    <div className={` ${details?.isComplete ? "bg-grey-500" : "" } mt-4 border border-gray-300 bg-gray-50 p-4 py-8 rounded-lg`}>
+    <div className={` ${details?.isComplete ? "bg-slate-300" : "" } mt-4 border border-gray-300 bg-gray-50 p-4 py-8 rounded-lg`}>
       <div className={` ${details?.isComplete ? "pointer-events-none" : "pointer-events-auto"} `}>
         <label htmlFor="companyName">Company Name</label>
         <input
