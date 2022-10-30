@@ -13,6 +13,16 @@ export const userSlice = createSlice({
     experience :[
 
     ],
+    education : [
+      {
+        index :0,
+        schoolName: "dsadasasda",
+        degree: "bca",
+        year: "2005",
+        gpa: "8.5/10",
+        isComplete: false,
+      }
+    ]
 
   },
   reducers: {
@@ -27,7 +37,10 @@ export const userSlice = createSlice({
     },
     updateExp : (state:any,action:any)=>{
       state.experience[action.payload.index] = action.payload.details;
-    }
+    },
+    updateEdu : (state:any,action:any)=>{
+      state.education[action.payload.index] = action.payload.details;
+    },
   },
 });
 
