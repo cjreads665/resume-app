@@ -12,6 +12,15 @@ const Experience = () => {
   //it gets increased every time the add button is clicked
   const [count, setCount] = useState(0)
 
+  //index to track the latest index to give to NEW forms
+  // if there is data available, then get the length and give the length as latest index
+  // if there is non data available, start the index with 0
+  const [currentIndex,setCurrentIndex] = useState(expArray[0] ? expArray.length : 0)
+// this index will be given to the new card and will be increased when the card is created.
+console.log(currentIndex);
+
+console.log(expArray);
+
 
   /* created state will track if the data has been sent to the redux store or not
   * once it is closed, the count will increase and we will get an extra card for no reason
@@ -29,8 +38,7 @@ const Experience = () => {
       setCreated(false)
   }
 },[created])
-console.log(count);
-console.log(expArray);
+
 
   return (
     <div className="my-4">
@@ -46,7 +54,7 @@ console.log(expArray);
         if(i==count){
           return;
         }
-          return <ExpForm key={i} count={count} setCreated={setCreated} />
+          return <ExpForm key={i} count={currentIndex} setCurrentIndex={setCurrentIndex} setCreated={setCreated} />
       }) }
     </div>
   );

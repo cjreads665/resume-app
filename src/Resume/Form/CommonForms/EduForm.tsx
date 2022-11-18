@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { updateEdu, addEdu} from "../../../redux/userSlice"
 
 const EduForm = (props:any) => {
   let dispatch = useDispatch()
@@ -10,6 +11,7 @@ const EduForm = (props:any) => {
     year: 0,
     gpa: "0",
     isComplete: false,
+    index :0
   });
 
   const deleteForm = ()=>{
@@ -41,7 +43,7 @@ const EduForm = (props:any) => {
           onChange={(e) => {
             setDetails((prevState: any) => ({
               ...prevState,
-              compName: e.target.value,
+              schoolName: e.target.value,
             }));
           }}
         ></input>
@@ -116,6 +118,23 @@ const EduForm = (props:any) => {
               ...prevState,
               isComplete: true,
             }));
+            if(!index){
+              dispatch(
+                updateEdu({
+                  index : details.index,
+                  details : details
+                })
+              );
+            }
+            else{
+              dispatch(
+                addEdu({
+                  details : details
+                })
+              )
+            props.setCreated(true)
+              
+            }
           }}
           className="px-4 py-1.5 mt-4 bg-green-400 "
         >
@@ -127,3 +146,11 @@ const EduForm = (props:any) => {
 };
 
 export default EduForm;
+// function addEdu(arg0: { details: { schoolName: string; degree: string; year: number; gpa: string; isComplete: boolean; }; }): any {
+//   throw new Error("Function not implemented.");
+// }
+
+// function updateEdu(arg0: { index: any; details: { schoolName: string; degree: string; year: number; gpa: string; isComplete: boolean; }; }): any {
+//   throw new Error("Function not implemented.");
+// }
+

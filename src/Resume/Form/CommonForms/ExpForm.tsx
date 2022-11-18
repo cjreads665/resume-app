@@ -30,7 +30,7 @@ const ExpForm = (props:any) => {
     endDate : [],
     jobDesc : '',
     isComplete : false,
-    index: 0
+    index: index-1
   })
  
   // console.log(details);
@@ -165,12 +165,14 @@ const ExpForm = (props:any) => {
     e.preventDefault()
     if(details?.endDate.length==0 || details?.startDate.length==0 || details?.jobDesc.length<4 || details.compName.length<2 || details.role.length==0 ){
       alert("please fill all the fields before proceeding!")
-      return
+      return;
     }
     setDetails((prevState:any)=>({
       ...prevState,
       isComplete : true
     }))
+
+    
     if(!index){
       dispatch(
         updateExp({
@@ -186,7 +188,7 @@ const ExpForm = (props:any) => {
         })
       )
     props.setCreated(true)
-      
+    props.setCurrentIndex((prevIndex:any)=> prevIndex+1) 
     }
 
   }}
