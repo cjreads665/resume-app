@@ -22,6 +22,14 @@ export const userSlice = createSlice({
       //   gpa: "8.5/10",
       //   isComplete: false,
       // }
+    ],
+    projects : [
+      {
+        projectName : "dsadas",
+        description : "dsaaasaa",
+        isComplete: false,
+        index:0
+      }
     ]
 
   },
@@ -38,15 +46,21 @@ export const userSlice = createSlice({
     addEdu : (state:any,action:any)=>{
       state.education.push(action.payload.details)
   },
+  addProject : (state:any,action:any)=>{
+    state.projects.push(action.payload.details)
+  },
     updateExp : (state:any,action:any)=>{
       state.experience[action.payload.index] = action.payload.details;
     },
     updateEdu : (state:any,action:any)=>{
       state.education[action.payload.index] = action.payload.details;
     },
+    updateProject:  (state:any,action:any)=>{
+      state.projects[action.payload.index] = action.payload.details;
+    },
   },
 });
 
-export const { addPersonalInfo,addSkills,addExp,updateExp,addEdu,updateEdu } = userSlice.actions;
+export const { addPersonalInfo,addSkills,addExp,updateExp,addEdu,updateEdu,addProject,updateProject } = userSlice.actions;
 
 export default userSlice.reducer;
