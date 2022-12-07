@@ -4,7 +4,7 @@ import { updateProject, addProject} from "../../../redux/userSlice"
 
 const ProjectsForm = (props: any) => {
   let dispatch = useDispatch();
-  console.log(props);
+  // console.log(props);
   
   let index = props.count;
   const [details, setDetails] = useState({
