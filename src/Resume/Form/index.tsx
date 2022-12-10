@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPersonalInfo } from "../../redux/userSlice";
 import React, { useState } from 'react'
 import Stepper from '../../Stepper/Stepper'
@@ -9,8 +9,13 @@ import Experience from './Experience';
 import PersonalInfo from './PersonalInfo';
 import Projects from './Projects';
 import Skills from './Skills';
+import axios from "axios";
 
 const index = () => {
+  const dev = 'http://localhost:8080';
+  const data = useSelector((state: any) => state.user);
+  console.log(data);
+  
   const [page,setPage] = useState(0);
   const titles = [
     'Personal Details',
@@ -64,7 +69,20 @@ const index = () => {
           }}
           disabled={page>=titles.length-1 ? true : false}
           >Next</button>
+        
         </div>
+        <div className="w-full flex flex-row justify-center my-4">
+        <button
+          className={`${titles[page]==='Ceritifications'? '' : ''} w-32 bg-green-300 font-bold py-4 px-4 rounded`}
+          onClick={(e)=>{
+            e.preventDefault();
+            axios.post(`${dev}/data`,{
+              data
+            })
+          }}
+          >Submit</button>
+        </div>
+
       </form>
   
   </div>

@@ -4,8 +4,8 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     personalInfo: {
-      name: "",
-      place: "",
+      // name: "",
+      // place: "",
     },
     skills: {},
     experience: [],
@@ -28,12 +28,12 @@ export const userSlice = createSlice({
       // }
     ],
     certifications: [
-      {
-        name: "algo",
-        year: 1998,
-        index : 0,
-        isComplete : false
-      },
+      // {
+      //   name: "algo",
+      //   year: 1998,
+      //   index : 0,
+      //   isComplete : false
+      // },
     ],
   },
   reducers: {
