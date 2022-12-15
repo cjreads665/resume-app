@@ -1,17 +1,28 @@
-import React, { Children, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPersonalInfo } from "../../redux/userSlice";
 import { useSelector } from "react-redux";
+import { PersonalInformation } from "../../Types";
 const PersonalInfo = () => {
   const dispatch = useDispatch();
-  const [personalInfo, setPersonalInfo] = useState({
+  const expArray = useSelector((state: any) => state.user.personalInfo);
+  // console.log(expArray);
+  
+  const [personalInfo, setPersonalInfo] = useState<PersonalInformation>({
     name: "",
     place: "",
     email: "",
     phone: "",
     website: "",
     summary: "",
+    github : "",
+    linkedin : ""
   });
+
+  useEffect(()=>{
+    setPersonalInfo(expArray)
+  },[expArray])
+
   const fields = [
     {
       type: "text",
@@ -49,9 +60,24 @@ const PersonalInfo = () => {
       label: "Professional Summary(3 lines minimum)",
       placeholder: "Ex: Web Developer with 2 years of experience",
     },
+    {
+      type: "text",
+      name: "github",
+      label: "Github Username",
+      placeholder: "Ex: coolname65",
+    },
+    {
+      type: "text",
+      name: "linkedin",
+      label: "Linkedin Username",
+      placeholder: "Ex: perofessional69",
+    },
   ];
 
   const list = Children.toArray(fields.map((field: any) => {
+    // console.log(field.name);
+    let k = field.name
+    
     return (
       <div className="mb-6">
         <label
@@ -74,6 +100,7 @@ const PersonalInfo = () => {
             );
             // console.log(state);
           }}
+          value={personalInfo[k as keyof typeof personalInfo]}
           required
         />
       </div>
