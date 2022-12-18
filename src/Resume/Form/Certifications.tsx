@@ -29,9 +29,9 @@ const Certifications = () => {
       >
         <i className="fa-solid fa-plus"></i>
       </button>
-      <button type="button" onClick={() => setCount(count - 1)}>
+      {/* <button type="button" onClick={() => setCount(count - 1)}>
         Click2
-      </button>
+      </button> */}
 
       {/**making the form for data that already exists inside store */}
       {expArray.map((obj: any, index: number) => (

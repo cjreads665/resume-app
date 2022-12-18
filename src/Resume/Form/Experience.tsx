@@ -48,7 +48,7 @@ console.log(expArray);
       <h5>To edit any card after confirming, please click on edit icon, update the details and click on tick to confirm</h5>
       </div>
       <button type="button" onClick={()=>setCount(count + 1)} className='py-2 px-3 bg-blue-200 rounded-md' ><i className="fa-solid fa-plus"></i></button>
-      <button type="button" disabled={count!==0 ? false : true} onClick={()=>setCount(count - 1)} >Click2</button>
+      {/* <button type="button" disabled={count!==0 ? false : true} onClick={()=>setCount(count - 1)} >Click2</button> */}
       {/** map all the existing redux data to ExpForms */}
       {expArray.map((obj:any,index:number)=><ExpForm details={obj} key={obj.index}/>)}
       {/** make an array of size = count, then loop according to the size 

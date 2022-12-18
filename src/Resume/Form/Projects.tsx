@@ -30,9 +30,9 @@ const Projects = () => {
       >
         <i className="fa-solid fa-plus"></i>
       </button>
-      <button type="button" onClick={() => setCount(count - 1)}>
+      {/* <button type="button" onClick={() => setCount(count - 1)}>
         Click2
-      </button>
+      </button> */}
 
       {expArray.map((obj: any, index: number) => (
         <ProjectsForm key={obj.index} details={obj} />
