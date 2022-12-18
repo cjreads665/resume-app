@@ -43,6 +43,10 @@ console.log(expArray);
   return (
     <div className="my-4">
       <h4>No experience ? You can skip this part!</h4>
+      <div className="my-4">
+      <h5 className="my-2">Please click on the tick icon to confirm your details for the card</h5>
+      <h5>To edit any card after confirming, please click on edit icon, update the details and click on tick to confirm</h5>
+      </div>
       <button type="button" onClick={()=>setCount(count + 1)} className='py-2 px-3 bg-blue-200 rounded-md' ><i className="fa-solid fa-plus"></i></button>
       <button type="button" disabled={count!==0 ? false : true} onClick={()=>setCount(count - 1)} >Click2</button>
       {/** map all the existing redux data to ExpForms */}

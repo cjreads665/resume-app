@@ -1,38 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addExp, updateExp} from "../../../redux/userSlice"
+import { addExp, updateExp } from "../../../redux/userSlice";
 
-function capitalizeFirstLetter(string:string) {
+function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 //october = 10
-function getMonthNumber(object:any, value:string) {
-  if(value){
-    value = value.toLowerCase()
-    let monthNumber = Number(Object.keys(object).find(key => object[key] === value))
-    if(monthNumber>=10){
-      return monthNumber
-    }
-    else{
-     return ('0' + monthNumber).slice(-2) 
+function getMonthNumber(object: any, value: string) {
+  if (value) {
+    value = value.toLowerCase();
+    let monthNumber = Number(
+      Object.keys(object).find((key) => object[key] === value)
+    );
+    if (monthNumber >= 10) {
+      return monthNumber;
+    } else {
+      return ("0" + monthNumber).slice(-2);
     }
   }
 }
 
-const ExpForm = (props:any) => {
-  let dispatch = useDispatch()
-  let index = props.count+1
-  
-  const [details,setDetails] = useState({
-    compName : '',
-    role : '',
-    startDate : [],
-    endDate : [],
-    jobDesc : '',
-    isComplete : false,
-    index: index-1
-  })
- 
+const ExpForm = (props: any) => {
+  let dispatch = useDispatch();
+  let index = props.count + 1;
+
+  const [details, setDetails] = useState({
+    compName: "",
+    role: "",
+    startDate: [],
+    endDate: [],
+    jobDesc: "",
+    isComplete: false,
+    index: index - 1,
+    checkbox : false
+  });
+
   // console.log(details);
   var months: any = {
     1: "january",
@@ -49,32 +51,40 @@ const ExpForm = (props:any) => {
     12: "december",
   };
 
-  const deleteForm = ()=>{
-    props.setCount((prev:any)=>prev.count - 1)
-  }
-
- useEffect(()=>{
-  if(!index){
-    setDetails(props.details)
-  }
-
- },[5])
+  console.log(details);
   
-  
+  const deleteForm = () => {
+    props.setCount((prev: any) => prev.count - 1);
+  };
+
+  useEffect(() => {
+    if (!index) {
+      setDetails(props.details);
+    }
+  }, [5]);
+
   return (
-    <div className={` ${details?.isComplete ? "bg-slate-300" : "" } mt-4 border border-gray-300 bg-gray-50 p-4 py-8 rounded-lg`}>
-      <div className={` ${details?.isComplete ? "pointer-events-none" : "pointer-events-auto"} `}>
+    <div
+      className={` ${
+        details?.isComplete ? "bg-slate-300" : ""
+      } mt-4 border border-gray-300 bg-gray-50 p-4 py-8 rounded-lg`}
+    >
+      <div
+        className={` ${
+          details?.isComplete ? "pointer-events-none" : "pointer-events-auto"
+        } `}
+      >
         <label htmlFor="companyName">Company Name</label>
         <input
           type="text"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
           placeholder="Facebook Inc."
           value={details?.compName}
-          onChange={(e)=>{
-            setDetails((prevState:any)=>({
+          onChange={(e) => {
+            setDetails((prevState: any) => ({
               ...prevState,
-              compName : e.target.value
-            }))
+              compName: e.target.value,
+            }));
           }}
         ></input>
         <label htmlFor="role">Role</label>
@@ -83,11 +93,11 @@ const ExpForm = (props:any) => {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
           placeholder="Ex : Web Developer"
           value={details?.role}
-          onChange={(e)=>{
-            setDetails((prevState:any)=>({
+          onChange={(e) => {
+            setDetails((prevState: any) => ({
               ...prevState,
-              role : e.target.value
-            }))
+              role: e.target.value,
+            }));
           }}
         />
         <div className="flex border border-3">
@@ -97,19 +107,23 @@ const ExpForm = (props:any) => {
               type="date"
               id="startDate"
               name="startDate"
-              className='border border-black p-2 rounded-md w-1/2'
-              value={`${details?.startDate[1]}-${getMonthNumber(months,details?.startDate[0])}-${details?.startDate[2]}`}
+              className="border border-black p-2 rounded-md w-1/2"
+              value={`${details?.startDate[1]}-${getMonthNumber(
+                months,
+                details?.startDate[0]
+              )}-${details?.startDate[2]}`}
               onChange={(e) => {
                 let date = e.target.value;
                 console.log(date);
-                let startDay = date.split("-")[2]
-                let startMonth = capitalizeFirstLetter(months[Number(date.split("-")[1])]); //month
+                let startDay = date.split("-")[2];
+                let startMonth = capitalizeFirstLetter(
+                  months[Number(date.split("-")[1])]
+                ); //month
                 let startYear = date.split("-")[0]; //year
-                setDetails((prevState:any)=>({
+                setDetails((prevState: any) => ({
                   ...prevState,
-                  startDate : [startMonth,startYear,startDay]
-                }))
-                
+                  startDate: [startMonth, startYear, startDay],
+                }));
               }}
             ></input>
           </div>
@@ -119,84 +133,119 @@ const ExpForm = (props:any) => {
               type="date"
               id="endDate"
               name="endDate"
-              className='border border-black p-2 rounded-md w-1/2'
-              value={`${details?.endDate[1]}-${getMonthNumber(months,details?.endDate[0])}-${details?.endDate[2]}`}
+              className={`border ${details.checkbox? 'bg-grey-200' : ''} border-black p-2 rounded-md w-1/2`}
+              value={`${details?.endDate[1]}-${getMonthNumber(
+                months,
+                details?.endDate[0]
+              )}-${details?.endDate[2]}`}
+              disabled={details?.checkbox}
               onChange={(e) => {
                 let date = e.target.value;
                 console.log(date);
-                
-                let endDay = date.split("-")[2]
-                let endMonth = capitalizeFirstLetter(months[Number(date.split("-")[1])]); //month
-                
+
+                let endDay = date.split("-")[2];
+                let endMonth = capitalizeFirstLetter(
+                  months[Number(date.split("-")[1])]
+                ); //month
+
                 let endYear = date.split("-")[0]; //year
-                setDetails((prevState:any)=>({
+                setDetails((prevState: any) => ({
                   ...prevState,
-                  endDate : [endMonth,endYear,endDay]
-                }))
+                  endDate: [endMonth, endYear, endDay],
+                }));
               }}
             ></input>
+            <div className="flex">
+              <label htmlFor="present">Present</label>
+            <input type="checkbox" name="present" id="present"
+            onChange={(e)=>{
+              setDetails((prevState: any) => ({
+                ...prevState,
+                checkbox: e.target.checked,
+                endDate: 'Present',
+              }));
+              console.log(details);
+            }}
+            checked={details?.checkbox}
+            />
+            </div>
           </div>
         </div>
-        <label htmlFor="description">Job Description(minimum 3 sentences)</label>
-   <textarea name="description" id="description" rows={4} className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
-   placeholder="Ex: Created and managed react components."
-   value={details?.jobDesc}
-   onChange={(e)=>{
-    setDetails((prevState:any)=>({
-      ...prevState,
-      jobDesc : e.target.value
-    }))
-  }}
-   ></textarea>
-   </div>
-   <div className='flex w-full justify-evenly'>
-   <button type='submit'
-   onClick={(e)=>{
-    e.preventDefault()
-    setDetails((prevState:any)=>({
-      ...prevState,
-      isComplete : false
-    }))
-  }}
-   className='px-4 py-1.5 mt-4 bg-blue-400 '><i className="fa-solid fa-pen-to-square"></i>
-   </button>
-   <button type='button'
-   onClick={(e)=>{
-    e.preventDefault()
-    if(details?.endDate.length==0 || details?.startDate.length==0 || details?.jobDesc.length<4 || details.compName.length<2 || details.role.length==0 ){
-      alert("please fill all the fields before proceeding!")
-      return;
-    }
-    setDetails((prevState:any)=>({
-      ...prevState,
-      isComplete : true
-    }))
-
-    
-    if(!index){
-      dispatch(
-        updateExp({
-          index : details.index,
-          details : details
-        })
-      );
-    }
-    else{
-      dispatch(
-        addExp({
-          details : details
-        })
-      )
-    props.setCreated(true)
-    props.setCurrentIndex((prevIndex:any)=> prevIndex+1) 
-    }
-
-  }}
-   className='px-4 py-1.5 mt-4 bg-green-400 '><i className="fa-solid fa-check"></i></button>
-
-   </div>
+        <label htmlFor="description">
+          Job Description(minimum 3 sentences)
+        </label>
+        <textarea
+          name="description"
+          id="description"
+          rows={4}
+          className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400"
+          placeholder="Ex: Created and managed react components."
+          value={details?.jobDesc}
+          onChange={(e) => {
+            setDetails((prevState: any) => ({
+              ...prevState,
+              jobDesc: e.target.value,
+            }));
+          }}
+        ></textarea>
       </div>
-  )
-}
+      <div className="flex w-full justify-evenly">
+        <button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            setDetails((prevState: any) => ({
+              ...prevState,
+              isComplete: false,
+            }));
+          }}
+          className="px-4 py-1.5 mt-4 bg-blue-400 "
+        >
+          <i className="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            if (
+              details?.endDate.length == 0 ||
+              details?.startDate.length == 0 ||
+              details?.jobDesc.length < 4 ||
+              details.compName.length < 2 ||
+              details.role.length == 0
+            ) {
+              alert("please fill all the fields before proceeding!");
+              return;
+            }
+            setDetails((prevState: any) => ({
+              ...prevState,
+              isComplete: true,
+            }));
 
-export default ExpForm
+            if (!index) {
+              dispatch(
+                updateExp({
+                  index: details.index,
+                  details: details,
+                })
+              );
+            } else {
+              dispatch(
+                addExp({
+                  details: details,
+                })
+              );
+              props.setCreated(true);
+              props.setCurrentIndex((prevIndex: any) => prevIndex + 1);
+            }
+          }}
+          className="px-4 py-1.5 mt-4 bg-green-400 "
+        >
+          <i className="fa-solid fa-check"></i>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ExpForm;

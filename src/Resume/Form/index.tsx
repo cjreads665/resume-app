@@ -89,14 +89,12 @@ const index = () => {
             } w-32 bg-green-300 font-bold py-4 px-4 rounded`}
             onClick={(e) => {
               e.preventDefault();
-              axios
-                .post(`${api.dev}/data`, {
-                  data,
-                })
-                setTimeout(() => {
-                  axios.get(`${api.dev}/download`)
-                }, 2000);
-
+              axios.post(`${api.dev}/data`, {
+                data,
+              });
+              setTimeout(() => {
+                axios.get(`${api.dev}/download`);
+              }, 3000);
             }}
           >
             Submit
