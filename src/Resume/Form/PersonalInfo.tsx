@@ -79,7 +79,7 @@ const PersonalInfo = () => {
     let k = field.name
     
     return (
-      <div className="mb-6">
+      <div className="mb-6 w-[100%] ">
         <label
           htmlFor={field.name}
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
@@ -106,7 +106,9 @@ const PersonalInfo = () => {
       </div>
     );
   }));
-  return <div>{list}</div>;
+  return <div
+  className=""
+  >{list}</div>;
 };
 
 export default PersonalInfo;

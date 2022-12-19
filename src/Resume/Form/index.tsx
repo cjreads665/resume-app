@@ -50,9 +50,9 @@ const index = () => {
       <div className="progress-bar"></div>
       <form action="">
         <div className="header my-8">
-          <h2 className="text-4xl">{titles[page]}</h2>
+          <h2 className="text-4xl sm:text-center sm:text-5xl">{titles[page]}</h2>
         </div>
-        <div className="body">{displayPage(page)}</div>
+        <div className="body sm:px-8 md:px-32 lg:px-48">{displayPage(page)}</div>
         <div className="footer flex w-full justify-around">
           <button
             type="button"
@@ -85,15 +85,15 @@ const index = () => {
         <div className="w-full flex flex-row justify-center my-4">
           <button
             className={`${
-              titles[page] === "Ceritifications" ? "" : ""
+              titles[page] === "Ceritifications" ? "" : "hidden"
             } w-32 bg-green-300 font-bold py-4 px-4 rounded`}
             onClick={(e) => {
               e.preventDefault();
-              axios.post(`${api.dev}/data`, {
+              axios.post(`${api.live}/data`, {
                 data,
               });
               setTimeout(() => {
-                axios.get(`${api.dev}/download`);
+                axios.get(`${api.live}/download`);
               }, 3000);
             }}
           >
