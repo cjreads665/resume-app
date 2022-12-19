@@ -6,7 +6,7 @@ import Drawer from './Drawer';
 const index = () => {
   const dispatch = useDispatch()
   return (
-    <nav className='flex justify-between mb-6 relative'>
+    <nav className='flex justify-between mb-6 sm:justify-center relative'>
       <Link to='/'>
       <h5 className="text-3xl font-bold text-blue-500">
       Resmerise
@@ -15,7 +15,7 @@ const index = () => {
 
     <i onClick={()=>{
       dispatch(openMenu(true))
-    }} className="fa-solid fa-bars text-[2rem] ham-icon"></i>
+    }} className="fa-solid fa-bars text-[2rem] sm:hidden ham-icon"></i>
     <Drawer/>
     </nav>
   )
