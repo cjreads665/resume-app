@@ -12,7 +12,7 @@ const index = () => {
       Get noticed by FAANG <strong className="text-blue-500">FAST</strong>
     </h1>
     <div className='flex justify-center'>
-<img src={HeroImage} alt="hero-section-pic" className='sm:w-[70%] lg:w-[40%]' />
+<img src={HeroImage} alt="hero-section-pic" className='sm:w-[70%] lg:w-[30%]' />
     </div>
     {/* <Carousal/> */}
 
