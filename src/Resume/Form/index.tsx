@@ -10,6 +10,7 @@ import PersonalInfo from "./PersonalInfo";
 import Projects from "./Projects";
 import Skills from "./Skills";
 import axios from "axios";
+import SuccessMsg from "../SuccessMsg";
 
 const index = () => {
   const api = {
@@ -19,7 +20,7 @@ const index = () => {
 
   const data = useSelector((state: any) => state.user);
   console.log(data);
-
+  const [showMsg,setShowMsg] = useState(false)
   const [page, setPage] = useState(0);
   const titles = [
     "Personal Details",
@@ -52,6 +53,7 @@ const index = () => {
         <div className="header my-8">
           <h2 className="text-4xl sm:text-center sm:text-5xl">{titles[page]}</h2>
         </div>
+        <SuccessMsg props={showMsg} />
         <div className="body sm:px-8 md:px-32 lg:px-48">{displayPage(page)}</div>
         <div className="footer flex w-full justify-around">
           <button
@@ -95,12 +97,17 @@ const index = () => {
               setTimeout(() => {
                 axios.get(`${api.live}/download`);
               }, 3000);
+              setShowMsg(true)
+              setTimeout(()=>{
+                setShowMsg(false)
+              },30000)
             }}
           >
             Submit
           </button>
         </div>
       </form>
+        <SuccessMsg props={showMsg}/>
     </div>
   );
 };
