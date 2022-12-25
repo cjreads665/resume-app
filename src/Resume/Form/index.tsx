@@ -95,12 +95,11 @@ const index = () => {
             } w-32 bg-green-300 font-bold py-4 px-4 rounded`}
             onClick={(e) => {
               e.preventDefault();
-              axios.post(`${api.live}/data`, {
+              axios.post(`${api.dev}/data`, {
                 data,
               })
-              setTimeout(() => {
               axios
-                .get(`${api.live}/download`, {
+                .get(`${api.dev}/download`, {
                   responseType: "arraybuffer",
                 })
                 .then((res) => {
@@ -117,7 +116,6 @@ const index = () => {
                   //automatically clicking the link
                   link.click();
                 });
-              }, 3000);
               setShowMsg(true);
               setTimeout(() => {
                 setShowMsg(false);
