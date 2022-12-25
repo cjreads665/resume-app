@@ -72,6 +72,12 @@ const PersonalInfo = () => {
       label: "Linkedin Username",
       placeholder: "Ex: perofessional69",
     },
+    {
+      type: "text",
+      name: "current-role",
+      label: "Your Current Role",
+      placeholder: "Ex: Front End Developer",
+    },
   ];
 
   const list = Children.toArray(fields.map((field: any) => {
