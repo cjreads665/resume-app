@@ -20,7 +20,7 @@ const index = () => {
 
   const data = useSelector((state: any) => state.user);
   console.log(data);
-  const [showMsg,setShowMsg] = useState(false)
+  const [showMsg, setShowMsg] = useState(false);
   const [page, setPage] = useState(0);
   const titles = [
     "Personal Details",
@@ -51,10 +51,14 @@ const index = () => {
       <div className="progress-bar"></div>
       <form action="">
         <div className="header my-8">
-          <h2 className="text-4xl sm:text-center sm:text-5xl">{titles[page]}</h2>
+          <h2 className="text-4xl sm:text-center sm:text-5xl">
+            {titles[page]}
+          </h2>
         </div>
         <SuccessMsg props={showMsg} />
-        <div className="body sm:px-8 md:px-32 lg:px-48">{displayPage(page)}</div>
+        <div className="body sm:px-8 md:px-32 lg:px-48">
+          {displayPage(page)}
+        </div>
         <div className="footer flex w-full justify-around">
           <button
             type="button"
@@ -91,23 +95,40 @@ const index = () => {
             } w-32 bg-green-300 font-bold py-4 px-4 rounded`}
             onClick={(e) => {
               e.preventDefault();
-              axios.post(`${api.live}/data`, {
+              axios.post(`${api.dev}/data`, {
                 data,
-              });
+              })
               setTimeout(() => {
-                axios.get(`${api.live}/download`);
+              axios
+                .get(`${api.dev}/download`, {
+                  responseType: "arraybuffer",
+                })
+                .then((res) => {
+                  //creating a url for the blob data
+                  const url = window.URL.createObjectURL(
+                    new Blob([res.data])
+                  );
+                  //creating a link element
+                  const link = document.createElement("a");
+                  //giving the url of the file to link
+                  link.href = url;
+                  link.setAttribute("download", "file.pdf");
+                  document.body.appendChild(link);
+                  //automatically clicking the link
+                  link.click();
+                });
               }, 3000);
-              setShowMsg(true)
-              setTimeout(()=>{
-                setShowMsg(false)
-              },30000)
+              setShowMsg(true);
+              setTimeout(() => {
+                setShowMsg(false);
+              }, 30000);
             }}
           >
             Submit
           </button>
         </div>
       </form>
-        <SuccessMsg props={showMsg}/>
+      <SuccessMsg props={showMsg} />
     </div>
   );
 };
