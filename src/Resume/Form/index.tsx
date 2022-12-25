@@ -95,12 +95,12 @@ const index = () => {
             } w-32 bg-green-300 font-bold py-4 px-4 rounded`}
             onClick={(e) => {
               e.preventDefault();
-              axios.post(`${api.dev}/data`, {
+              axios.post(`${api.live}/data`, {
                 data,
               })
               setTimeout(() => {
               axios
-                .get(`${api.dev}/download`, {
+                .get(`${api.live}/download`, {
                   responseType: "arraybuffer",
                 })
                 .then((res) => {
