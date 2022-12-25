@@ -95,13 +95,13 @@ const index = () => {
             } w-32 bg-green-300 font-bold py-4 px-4 rounded`}
             onClick={(e) => {
               e.preventDefault();
-              axios.post(`${api.dev}/data`, {
+              axios.post(`${api.live}/data`, {
                 data,
-              })
-              axios
-                .get(`${api.dev}/download`, {
+              },{
+                //https://stackoverflow.com/questions/39486379/node-express-save-pdf-from-binary-string
+                responseEncoding: "binary",
                   responseType: "arraybuffer",
-                })
+              })
                 .then((res) => {
                   //creating a url for the blob data
                   const url = window.URL.createObjectURL(
@@ -115,7 +115,25 @@ const index = () => {
                   document.body.appendChild(link);
                   //automatically clicking the link
                   link.click();
-                });
+                })
+              // axios
+              //   .get(`${api.dev}/download`, {
+              //     responseType: "arraybuffer",
+              //   })
+              //   .then((res) => {
+              //     //creating a url for the blob data
+              //     const url = window.URL.createObjectURL(
+              //       new Blob([res.data])
+              //     );
+              //     //creating a link element
+              //     const link = document.createElement("a");
+              //     //giving the url of the file to link
+              //     link.href = url;
+              //     link.setAttribute("download", "file.pdf");
+              //     document.body.appendChild(link);
+              //     //automatically clicking the link
+              //     link.click();
+              //   });
               setShowMsg(true);
               setTimeout(() => {
                 setShowMsg(false);
